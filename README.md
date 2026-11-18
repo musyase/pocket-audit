@@ -22,7 +22,7 @@ Requires JDK 17 or newer and an Android SDK with API 35. Open the project in And
 ./gradlew testDebugUnitTest assembleDebug
 ```
 
-On Windows, use `gradlew.bat`. Install `app/build/outputs/apk/debug/app-debug.apk` on an emulator or device with Android 8.0 or newer. The [CI workflow](https://github.com/musyase/pocket-audit/actions/workflows/android.yml) also builds a debug APK artifact.
+On Windows, use `gradlew.bat`. Install `app/build/outputs/apk/debug/app-debug.apk` on an emulator or device with Android 8.0 or newer. A [debug APK from the passing CI build](https://github.com/musyase/pocket-audit/releases/download/v0.1.0/pocket-audit-debug.apk) is available in the demo prerelease. It is debug-signed and is not a Play Store package.
 
 To import your own list, start with [`app/src/main/assets/demo_inventory.csv`](app/src/main/assets/demo_inventory.csv). Codes are matched exactly after trimming outer whitespace. Extra CSV columns are ignored. The current version supports one active audit on one device; it has no account, synchronization, OCR, or automatic backup.
 
@@ -33,7 +33,7 @@ To import your own list, start with [`app/src/main/assets/demo_inventory.csv`](a
 - [`CameraScanner`](app/src/main/java/dev/musyase/pocketaudit/ui/CameraScanner.kt) uses on-device barcode analysis. [`AuditDatabase`](app/src/main/java/dev/musyase/pocketaudit/data/AuditDatabase.kt) holds local state.
 - [`ArchiveWriter`](app/src/main/java/dev/musyase/pocketaudit/domain/ArchiveWriter.kt) writes the report and checksums. The Python verifier checks exported files independently.
 
-Unit tests cover quoted and malformed CSV, duplicate codes, the distinction between not checked and missing, unexpected items, and archive contents. An Android instrumented test feeds a generated QR image to the bundled ML Kit decoder; run it on an emulator with `./gradlew connectedDebugAndroidTest`. `PRODUCT.md` and `DESIGN.md` record the intended workflow and interface decisions. Screenshots below are captured from the running Android emulator, not mockups.
+Unit tests cover quoted and malformed CSV, duplicate codes, the distinction between not checked and missing, unexpected items, and archive contents. An Android instrumented test feeds a generated QR image to the bundled ML Kit decoder; run it on an emulator with `./gradlew connectedDebugAndroidTest`. An exported ZIP containing a camera photo was also checked with the independent verifier. Live scanning on a physical device has not yet been tested. `PRODUCT.md` and `DESIGN.md` record the intended workflow and interface decisions. Screenshots below are captured from the running Android emulator, not mockups.
 
 ## Screenshots
 
